@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="javascript/pixi.min.js"></script>
+    <script src="javascript/pixi-filters.js"></script>
+    <script src="javascript/simpleTone.js"></script>
+    
+    
+    <script>
+        let app;
+
+        var turn;
+        turn="watch";
+
+
+        var leval;
+        leval=1;
+
+        var sound=0;
+        var round=1;
+        var score=0;
+        var sequance=[];
+        var score_result=[0,0,0];
+        var i=0,j=0;
+        var current=0,previous=-1;
+
+        var app_aene,kad_aene;
+
+
+
+        window.onload = function(){
+
+            //console.log(window.innerHeight);
+            //console.log(window.innerWidth);
+            app=new PIXI.Application(
+                {
+                    width:window.screen.availWidth,
+                    padding:0,
+                    margin:0,
+                    antialias: true, 
+                    transparent: false, 
+                    resolution: 1,
+                    height:window.innerHeight-5,
+                    backgroundColor: 0x121212
+                }
+            );
+
+            //var second_container=new PIXI.Container();
+            //var third_container=new PIXI.Container();
+            //var fourth_container=new PIXI.Container();
+            //var first_container=new PIXI.Container();
+            //var fifth_container=new PIXI.Container();
+            
+            var dabo=[];
+
+            //dabo.push(first_container);
+            //dabo.push(second_container);
+            //dabo.push(third_container);
+            //dabo.push(fourth_container);
+            //dabo.push(fifth_container);
+
+            app.view.x=window.screen.availWidth/2;
+            document.body.appendChild(app.view);
+
+            var circles=[];
+            for(var i=0;i<53;i++)
+            {
+                circles[i]=new PIXI.Graphics();
+                circles[i].lineStyle(3,0xfac76e);
+                circles[i].drawCircle(0, 0, i);
+                circles[i].endFill();
+                circles[i].antialias=true;
+                circles[i].x = app.view.width/2;
+                circles[i].y = app.view.height/2;
+                circles[i].visible=false;
+                //console.log("kskk");
+
+                app.stage.addChild(circles[i]);
+            }   
+            
+            
+
+            var meetID;
+            var i=0,j=0;
+            
+            circles[52].visible=false;
+            circles[51].visible=false;
+
+            i=0;
+            meetID = window.setInterval(growCircle,50);
+            //console.log(meetID);
+
+            
+            
+
+            //console.log(meetID);
+            function growCircle(x)
+            {
+                i++;
+                if(i==51)
+                {
+                    
+                    stopGrowing();
+                    j++;
+                    //console.log("avo aya");
+                }
+                
+                circles[i].visible=true;   
+                circles[i-1].visible=false; 
+
+                if(i==51 && j<6)
+                {
+                    circles[52].visible=false;
+                    circles[51].visible=false;
+                    
+                    i=0;
+                    meetID = window.setInterval(growCircle,50);
+                }
+
+                if(j==6)
+                {
+                    //create_fourth_container(dabo);
+                    create_first_container();
+                }
+                
+            }
+            
+            function stopGrowing()
+            {
+                window.clearInterval(meetID);
+                    
+            }  
+            
+
+
+            
+            
+
+
+            
+        }
+    </script>
+    <script src="javascript/make_first.js"></script>
+    <script src="javascript/make_second.js"></script>
+    <script src="javascript/make_third.js"></script>
+    <script src="javascript/make_fourth.js"></script>
+    <script src="javascript/make_fifth.js"></script>
+    <script src="javascript/make_info.js"></script>
+
+
+</head>
+<body style="padding: 0px;margin: 0px;">
+    
+</body>
+</html>
